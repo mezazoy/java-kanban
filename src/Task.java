@@ -53,7 +53,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "id = " + id + " taskName - " + taskName + " description - " + description + " statusTask - "
+        return " id = " + id + " taskName - " + taskName + " description - " + description + " statusTask - "
                 + statusTask;
     }
 
@@ -67,6 +67,10 @@ public class Task {
 
     public void setStatusTask(Status statusTask) {
         this.statusTask = statusTask;
+    }
+
+    public Status getStatusTask() {
+        return statusTask;
     }
 }
 
