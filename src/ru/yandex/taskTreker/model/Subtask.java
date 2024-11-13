@@ -1,6 +1,8 @@
-import java.util.ArrayList;
+package ru.yandex.taskTreker.model;
 
-public class Subtask extends Epic{
+import ru.yandex.taskTreker.service.Status;
+
+public class Subtask extends Task {
     private final int epicId;
 
     public Subtask(String taskName, String description, Status statusTask, int epicId) {

@@ -1,9 +1,13 @@
+package ru.yandex.taskTreker.model;
+
+import ru.yandex.taskTreker.service.Status;
+
 import java.util.Objects;
 
 public class Task {
     private int id;
-    private String taskName;
-    private String description;
+    protected String taskName;
+    protected String description;
     private Status statusTask;
 
     public Task(String taskName, String description, Status statusTask) {
@@ -11,6 +15,10 @@ public class Task {
         this.taskName = taskName;
         this.description = description;
         this.statusTask = statusTask;
+    }
+
+    public Task() {
+
     }
 
     public int getId() {
