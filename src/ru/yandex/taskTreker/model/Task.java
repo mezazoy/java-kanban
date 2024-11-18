@@ -5,7 +5,7 @@ import ru.yandex.taskTreker.service.Status;
 import java.util.Objects;
 
 public class Task {
-    private int id;
+    protected int id;
     protected String taskName;
     protected String description;
     private Status statusTask;
@@ -79,6 +79,14 @@ public class Task {
 
     public Status getStatusTask() {
         return statusTask;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
 
