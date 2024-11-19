@@ -6,13 +6,14 @@ import ru.yandex.taskTreker.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
- public class InMemoryTaskManager implements TaskManager {
-     private final HashMap<Integer, Task> tasks = new HashMap<>();
-     private final HashMap<Integer, Epic> epics = new HashMap<>();
-     private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
+public class InMemoryTaskManager implements TaskManager {
+     private final Map<Integer, Task> tasks = new HashMap<>();
+     private final Map<Integer, Epic> epics = new HashMap<>();
+     private final Map<Integer, Subtask> subtasks = new HashMap<>();
      private int id = 0;
-     private final InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+     private final HistoryManager historyManager = Managers.getDefaultHistory();
 
      @Override
      public int add(Task task) {
@@ -57,11 +58,12 @@ import java.util.HashMap;
 
      @Override
      public Task getTaskByIdentifier(int idNumber) {
-         if (tasks.containsKey(idNumber)) {
              Task task = tasks.get(idNumber);
-             historyManager.add(task);
-             return task;
-         } else {
+             if(task != null) {
+                 historyManager.add(task);
+                 return task;
+             }
+          else {
              return null;
          }
      }
@@ -109,11 +111,11 @@ import java.util.HashMap;
 
      @Override
      public Epic getEpicByIdentifier(int idNumber) {
-         if (epics.containsKey(idNumber)) {
              Epic epic = epics.get(idNumber);
-             historyManager.add(epic);
-             return epic;
-         } else {
+             if (epic != null) {
+                 historyManager.add(epic);
+                 return epic;
+             } else {
              return null;
          }
      }
@@ -185,8 +187,8 @@ import java.util.HashMap;
 
      @Override
      public Subtask getSubtaskByIdentifier(int idNumber) {
-         if (subtasks.containsKey(idNumber)) {
              Subtask subtask = subtasks.get(idNumber);
+             if (subtask != null) {
              historyManager.add(subtask);
              return subtask;
          } else {
