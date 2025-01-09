@@ -44,9 +44,9 @@ public class SubtaskTest {
         String name1 = subtask.getTaskName();
         Status status1 = subtask.getStatusTask();
         int taskId = taskManager.add(subtask);
-        Assertions.assertEquals(name1, taskManager.getTaskByIdentifier(taskId).getTaskName() ,"Поле изменилось");
-        Assertions.assertEquals(status1, taskManager.getTaskByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
-        Assertions.assertEquals(descr1, taskManager.getTaskByIdentifier(
+        Assertions.assertEquals(name1, taskManager.getSubtaskByIdentifier(taskId).getTaskName() ,"Поле изменилось");
+        Assertions.assertEquals(status1, taskManager.getSubtaskByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
+        Assertions.assertEquals(descr1, taskManager.getSubtaskByIdentifier(
                 taskId).getDescription() ,"Поле изменилось");
     }
 

@@ -38,10 +38,11 @@ public class EpicTest {
 
     @Test
     void makeTheEpicYourOwnSubtask() {
-        Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
+        taskManager.createEpic(new Epic("Test addNewTask", "Test addNewTask description"));
 
+        Epic epic = taskManager.getEpicByIdentifier(1);
         epic.addSubtaskId(epic.getId());
-        Assertions.assertNull(epic.getSubtasksId(), "Эпик добавлен как subtask!");
+        Assertions.assertEquals(epic.getSubtasksId(), null, "Эпик добавлен как subtask!");
     }
 
     @Test
@@ -52,9 +53,9 @@ public class EpicTest {
         String name1 = epic.getTaskName();
         Status status1 = epic.getStatusTask();
         int taskId = taskManager.add(epic);
-        Assertions.assertEquals(name1, taskManager.getTaskByIdentifier(taskId).getTaskName() ,"Поле изменилось");
-        Assertions.assertEquals(status1, taskManager.getTaskByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
-        Assertions.assertEquals(descr1, taskManager.getTaskByIdentifier(
+        Assertions.assertEquals(name1, taskManager.getEpicByIdentifier(taskId).getTaskName() ,"Поле изменилось");
+        Assertions.assertEquals(status1, taskManager.getEpicByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
+        Assertions.assertEquals(descr1, taskManager.getEpicByIdentifier(
                 taskId).getDescription() ,"Поле изменилось");
     }
 

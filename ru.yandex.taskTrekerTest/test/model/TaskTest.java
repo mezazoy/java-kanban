@@ -9,28 +9,27 @@ import java.util.List;
 import static ru.yandex.taskTreker.service.Status.NEW;
 
 class TaskTest {
-  TaskManager taskManager = Managers.getDefault();
-  HistoryManager historyManager = Managers.getDefaultHistory();
+    TaskManager taskManager = Managers.getDefault();
+    HistoryManager historyManager = Managers.getDefaultHistory();
 
 
+    @Test
+    void addNewTask() {
+        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW);
 
-  @Test
-  void addNewTask() {
-      Task task = new Task("Test addNewTask", "Test addNewTask description", NEW);
+        final int taskId = taskManager.add(task);
 
-      final int taskId = taskManager.add(task);
+        final Task savedTask = taskManager.getTaskByIdentifier(taskId);
 
-      final Task savedTask = taskManager.getTaskByIdentifier(taskId);
+        Assertions.assertNotNull(savedTask, "Задача не найдена.");
+        Assertions.assertEquals(task, savedTask, "Задачи не совпадают.");
 
-      Assertions.assertNotNull(savedTask, "Задача не найдена.");
-      Assertions.assertEquals(task, savedTask, "Задачи не совпадают.");
+        final List<Task> tasks = taskManager.getTasks();
 
-      final List<Task> tasks = taskManager.getTasks();
-
-      Assertions.assertNotNull(tasks, "Задачи не возвращаются.");
-      Assertions.assertEquals(1, tasks.size(), "Неверное количество задач.");
-      Assertions.assertEquals(task, tasks.get(0), "Задачи не совпадают.");
-  }
+        Assertions.assertNotNull(tasks, "Задачи не возвращаются.");
+        Assertions.assertEquals(1, tasks.size(), "Неверное количество задач.");
+        Assertions.assertEquals(task, tasks.get(0), "Задачи не совпадают.");
+    }
 
     @Test
     void addHistory() {
@@ -50,12 +49,11 @@ class TaskTest {
         String name1 = task.getTaskName();
         Status status1 = task.getStatusTask();
         int taskId = taskManager.add(task);
-        Assertions.assertEquals(name1, taskManager.getTaskByIdentifier(taskId).getTaskName() ,"Поле изменилось");
-        Assertions.assertEquals(status1, taskManager.getTaskByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
+        Assertions.assertEquals(name1, taskManager.getTaskByIdentifier(taskId).getTaskName(), "Поле изменилось");
+        Assertions.assertEquals(status1, taskManager.getTaskByIdentifier(taskId).getStatusTask(), "Поле изменилось");
         Assertions.assertEquals(descr1, taskManager.getTaskByIdentifier(
-                taskId).getDescription() ,"Поле изменилось");
+                taskId).getDescription(), "Поле изменилось");
     }
-
 
 
 }
