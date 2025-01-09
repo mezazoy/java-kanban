@@ -1,6 +1,6 @@
 package ru.yandex.taskTreker.service;
 
-public class Node <E> {
+public class Node<E> {
 
     protected E data;
     protected Node<E> next;
