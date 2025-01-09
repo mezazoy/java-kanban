@@ -36,8 +36,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public ArrayList<Task> getTasks() {
         ArrayList<Task> tasksList = new ArrayList<>();
-        for (Task task : tasks.values()){
-            if (task != null){
+        for (Task task : tasks.values()) {
+            if (task != null) {
                 tasksList.add(task);
             }
         }
@@ -62,7 +62,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task getTaskByIdentifier(int idNumber) {
         Task task = tasks.get(idNumber);
-        if (task != null){
+        if (task != null) {
             historyManager.add(task);
             return task;
         } else {
@@ -90,8 +90,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public ArrayList<Epic> getEpics() {
         ArrayList<Epic> epicsList = new ArrayList<>();
-        for (Epic epic : epics.values()){
-            if (epic != null){
+        for (Epic epic : epics.values()) {
+            if (epic != null) {
                 epicsList.add(epic);
             }
         }
@@ -167,8 +167,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public ArrayList<Subtask> getSubtasks() {
         ArrayList<Subtask> subtasksList = new ArrayList<>();
-        for (Subtask subtask : subtasks.values()){
-            if (subtask != null){
+        for (Subtask subtask : subtasks.values()) {
+            if (subtask != null) {
                 subtasksList.add(subtask);
             }
         }
