@@ -1,6 +1,6 @@
 package ru.yandex.taskTreker.service;
 
-public class Managers < T extends TaskManager > {
+public class Managers<T extends TaskManager> {
 
     public static TaskManager getDefault() {
 
