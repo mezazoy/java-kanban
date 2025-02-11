@@ -1,11 +1,12 @@
-package ru.yandex.taskTreker;
+package ru.yandex.taskTraker;
 
-import ru.yandex.taskTreker.model.Epic;
-import ru.yandex.taskTreker.model.Subtask;
-import ru.yandex.taskTreker.model.Task;
-import ru.yandex.taskTreker.service.*;
+import ru.yandex.taskTraker.model.Epic;
+import ru.yandex.taskTraker.model.Subtask;
+import ru.yandex.taskTraker.model.Task;
+import ru.yandex.taskTraker.service.*;
 
-import static ru.yandex.taskTreker.service.Status.NEW;
+
+import static ru.yandex.taskTraker.service.Status.NEW;
 
 public class Main {
 
@@ -36,5 +37,6 @@ public class Main {
 
         System.out.println(historyManager.getHistory());
         System.out.println(historyManager.getTail());
+
     }
 }

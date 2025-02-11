@@ -1,8 +1,8 @@
-package ru.yandex.taskTreker.service;
+package ru.yandex.taskTraker.service;
 
-import ru.yandex.taskTreker.model.Epic;
-import ru.yandex.taskTreker.model.Subtask;
-import ru.yandex.taskTreker.model.Task;
+import ru.yandex.taskTraker.model.Epic;
+import ru.yandex.taskTraker.model.Subtask;
+import ru.yandex.taskTraker.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;

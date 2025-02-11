@@ -1,4 +1,4 @@
-package ru.yandex.taskTreker.service;
+package ru.yandex.taskTraker.service;
 
 public class Managers<T extends TaskManager> {
 

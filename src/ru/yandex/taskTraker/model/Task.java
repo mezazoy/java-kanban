@@ -1,6 +1,6 @@
-package ru.yandex.taskTreker.model;
+package ru.yandex.taskTraker.model;
 
-import ru.yandex.taskTreker.service.Status;
+import ru.yandex.taskTraker.service.Status;
 
 import java.util.Objects;
 

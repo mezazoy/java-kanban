@@ -2,16 +2,14 @@ package test.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.taskTreker.model.Epic;
-import ru.yandex.taskTreker.model.Task;
-import ru.yandex.taskTreker.service.HistoryManager;
-import ru.yandex.taskTreker.service.Managers;
-import ru.yandex.taskTreker.service.Status;
-import ru.yandex.taskTreker.service.TaskManager;
+import ru.yandex.taskTraker.model.Epic;
+import ru.yandex.taskTraker.model.Task;
+import ru.yandex.taskTraker.service.HistoryManager;
+import ru.yandex.taskTraker.service.Managers;
+import ru.yandex.taskTraker.service.Status;
+import ru.yandex.taskTraker.service.TaskManager;
 
 import java.util.List;
-
-import static ru.yandex.taskTreker.service.Status.NEW;
 
 
 public class EpicTest {
@@ -42,7 +40,7 @@ public class EpicTest {
 
         Epic epic = taskManager.getEpicByIdentifier(1);
         epic.addSubtaskId(epic.getId());
-        Assertions.assertEquals(epic.getSubtasksId(), null, "Эпик добавлен как subtask!");
+        Assertions.assertEquals(epic.getSubtasksId().size(),0 , "Эпик добавлен как subtask!");
     }
 
     @Test

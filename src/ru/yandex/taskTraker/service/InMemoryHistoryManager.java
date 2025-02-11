@@ -1,14 +1,16 @@
-package ru.yandex.taskTreker.service;
+package ru.yandex.taskTraker.service;
 
-import ru.yandex.taskTreker.model.Task;
+import ru.yandex.taskTraker.model.Task;
 
 import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
 
-    private Node<Task> head;
-    private Node<Task> tail;
+    private Node<Task> head = null;
+    private Node<Task> tail = null;
+
+    private Map<Integer, Node<Task>> historyMap = new HashMap<>();
 
     public Node<Task> getHead() {
         return head;
@@ -18,16 +20,16 @@ public class InMemoryHistoryManager implements HistoryManager {
         return tail;
     }
 
-    Map<Integer, Node<Task>> historyMap = new HashMap<>();
-
-    private void lincLast(Task task) {
-        final Node<Task> newNode = new Node<>(tail, task, null);
+    private void linkLast(Task task) {
         if (tail == null) {
+            final Node<Task> newNode = new Node<>(null, task, null);
+            tail = newNode;
             head = newNode;
         } else {
+            final Node<Task> newNode = new Node<>(tail, task, null);
             tail.next = newNode;
+            tail = newNode;
         }
-        tail = newNode;
     }
 
     private ArrayList<Task> getTasks() {
@@ -63,11 +65,13 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        removeNode(task.getId());
-        lincLast(task);
-        historyMap.put(task.getId(), tail);
-
+        if (task != null) {
+            removeNode(task.getId());
+            linkLast(task);
+            historyMap.put(task.getId(), tail);
+        }
     }
+
 
     @Override
     public ArrayList<Task> getHistory() {
@@ -77,5 +81,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void remove(int id) {
         removeNode(id);
+        historyMap.remove(id);
     }
 }

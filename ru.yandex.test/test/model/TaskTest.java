@@ -1,12 +1,12 @@
 package test.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.taskTreker.model.Task;
-import ru.yandex.taskTreker.service.*;
+import ru.yandex.taskTraker.model.Task;
+import ru.yandex.taskTraker.service.*;
 
 import java.util.List;
 
-import static ru.yandex.taskTreker.service.Status.NEW;
+import static ru.yandex.taskTraker.service.Status.NEW;
 
 class TaskTest {
     TaskManager taskManager = Managers.getDefault();
