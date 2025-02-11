@@ -40,7 +40,7 @@ public class EpicTest {
 
         Epic epic = taskManager.getEpicByIdentifier(1);
         epic.addSubtaskId(epic.getId());
-        Assertions.assertEquals(epic.getSubtasksId().size(),0 , "Эпик добавлен как subtask!");
+        Assertions.assertEquals(epic.getSubtasksId().size(), 0, "Эпик добавлен как subtask!");
     }
 
     @Test
