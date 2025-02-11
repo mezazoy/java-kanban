@@ -51,10 +51,10 @@ public class EpicTest {
         String name1 = epic.getTaskName();
         Status status1 = epic.getStatusTask();
         int taskId = taskManager.add(epic);
-        Assertions.assertEquals(name1, taskManager.getEpicByIdentifier(taskId).getTaskName() ,"Поле изменилось");
-        Assertions.assertEquals(status1, taskManager.getEpicByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
+        Assertions.assertEquals(name1, taskManager.getEpicByIdentifier(taskId).getTaskName(), "Поле изменилось");
+        Assertions.assertEquals(status1, taskManager.getEpicByIdentifier(taskId).getStatusTask(), "Поле изменилось");
         Assertions.assertEquals(descr1, taskManager.getEpicByIdentifier(
-                taskId).getDescription() ,"Поле изменилось");
+                taskId).getDescription(), "Поле изменилось");
     }
 
     @Test
