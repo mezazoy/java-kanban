@@ -1,4 +1,4 @@
-package ru.yandex.test;
+package ru.yandex.test.java;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
