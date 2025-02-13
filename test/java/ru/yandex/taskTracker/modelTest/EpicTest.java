@@ -1,17 +1,15 @@
-package test.model;
+package ru.yandex.taskTracker.modelTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.taskTreker.model.Epic;
-import ru.yandex.taskTreker.model.Task;
-import ru.yandex.taskTreker.service.HistoryManager;
-import ru.yandex.taskTreker.service.Managers;
-import ru.yandex.taskTreker.service.Status;
-import ru.yandex.taskTreker.service.TaskManager;
+import ru.yandex.taskTraker.model.Epic;
+import ru.yandex.taskTraker.model.Task;
+import ru.yandex.taskTraker.service.HistoryManager;
+import ru.yandex.taskTraker.service.Managers;
+import ru.yandex.taskTraker.service.Status;
+import ru.yandex.taskTraker.service.TaskManager;
 
 import java.util.List;
-
-import static ru.yandex.taskTreker.service.Status.NEW;
 
 
 public class EpicTest {
@@ -38,10 +36,11 @@ public class EpicTest {
 
     @Test
     void makeTheEpicYourOwnSubtask() {
-        Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
+        taskManager.createEpic(new Epic("Test addNewTask", "Test addNewTask description"));
 
+        Epic epic = taskManager.getEpicByIdentifier(1);
         epic.addSubtaskId(epic.getId());
-        Assertions.assertNull(epic.getSubtasksId(), "Эпик добавлен как subtask!");
+        Assertions.assertEquals(epic.getSubtasksId().size(), 0, "Эпик добавлен как subtask!");
     }
 
     @Test
@@ -52,10 +51,10 @@ public class EpicTest {
         String name1 = epic.getTaskName();
         Status status1 = epic.getStatusTask();
         int taskId = taskManager.add(epic);
-        Assertions.assertEquals(name1, taskManager.getTaskByIdentifier(taskId).getTaskName() ,"Поле изменилось");
-        Assertions.assertEquals(status1, taskManager.getTaskByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
-        Assertions.assertEquals(descr1, taskManager.getTaskByIdentifier(
-                taskId).getDescription() ,"Поле изменилось");
+        Assertions.assertEquals(name1, taskManager.getEpicByIdentifier(taskId).getTaskName(), "Поле изменилось");
+        Assertions.assertEquals(status1, taskManager.getEpicByIdentifier(taskId).getStatusTask(), "Поле изменилось");
+        Assertions.assertEquals(descr1, taskManager.getEpicByIdentifier(
+                taskId).getDescription(), "Поле изменилось");
     }
 
     @Test

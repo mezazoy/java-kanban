@@ -1,7 +1,9 @@
-package ru.yandex.taskTreker.model;
+package ru.yandex.taskTraker.model;
 
 import java.util.ArrayList;
+
 public class Epic extends Task {
+
     private final ArrayList<Integer> subtaskId = new ArrayList<>();
 
     public Epic(String taskName, String description) {
@@ -12,13 +14,12 @@ public class Epic extends Task {
 
 
     public void addSubtaskId(int id) {
-        if(id < this.id) {
-            subtaskId.add(id);
-        }
+        if (id > this.id) subtaskId.add(id);
     }
 
     public ArrayList<Integer> getSubtasksId() {
-        return subtaskId;
+        return new ArrayList<>(subtaskId);
     }
-
 }
+
+

@@ -1,14 +1,14 @@
-package test.model;
+package ru.yandex.taskTracker.modelTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.yandex.taskTreker.model.Epic;
-import ru.yandex.taskTreker.model.Subtask;
-import ru.yandex.taskTreker.model.Task;
-import ru.yandex.taskTreker.service.HistoryManager;
-import ru.yandex.taskTreker.service.InMemoryTaskManager;
-import ru.yandex.taskTreker.service.Managers;
-import ru.yandex.taskTreker.service.Status;
+import ru.yandex.taskTraker.model.Epic;
+import ru.yandex.taskTraker.model.Subtask;
+import ru.yandex.taskTraker.model.Task;
+import ru.yandex.taskTraker.service.HistoryManager;
+import ru.yandex.taskTraker.service.InMemoryTaskManager;
+import ru.yandex.taskTraker.service.Managers;
+import ru.yandex.taskTraker.service.Status;
 
 import java.util.List;
 
@@ -44,10 +44,10 @@ public class SubtaskTest {
         String name1 = subtask.getTaskName();
         Status status1 = subtask.getStatusTask();
         int taskId = taskManager.add(subtask);
-        Assertions.assertEquals(name1, taskManager.getTaskByIdentifier(taskId).getTaskName() ,"Поле изменилось");
-        Assertions.assertEquals(status1, taskManager.getTaskByIdentifier(taskId).getStatusTask() ,"Поле изменилось");
-        Assertions.assertEquals(descr1, taskManager.getTaskByIdentifier(
-                taskId).getDescription() ,"Поле изменилось");
+        Assertions.assertEquals(name1, taskManager.getSubtaskByIdentifier(taskId).getTaskName(), "Поле изменилось");
+        Assertions.assertEquals(status1, taskManager.getSubtaskByIdentifier(taskId).getStatusTask(), "Поле изменилось");
+        Assertions.assertEquals(descr1, taskManager.getSubtaskByIdentifier(
+                taskId).getDescription(), "Поле изменилось");
     }
 
     @Test
