@@ -1,14 +1,17 @@
 package ru.yandex.taskTraker.model;
 
 import ru.yandex.taskTraker.service.Status;
+import ru.yandex.taskTraker.service.TaskTypes;
 
 import java.util.Objects;
+
 
 public class Task {
     protected int id;
     protected String taskName;
     protected String description;
     private Status statusTask;
+    protected TaskTypes taskType;
 
     public Task(String taskName, String description, Status statusTask) {
 
@@ -19,6 +22,14 @@ public class Task {
 
     public Task() {
 
+    }
+
+    public TaskTypes getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskTypes taskType) {
+        this.taskType = taskType;
     }
 
     public int getId() {
@@ -61,8 +72,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return " id = " + id + " taskName - " + taskName + " description - " + description + " statusTask - "
-                + statusTask;
+        return id + "," + taskType + "," + taskName + "," + statusTask + "," + description;
     }
 
     public void setTaskName(String taskName) {

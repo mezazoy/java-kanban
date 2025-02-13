@@ -48,6 +48,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void createTask(Task task) {
         id++;
         task.setId(id);
+        task.setTaskType(TaskTypes.TASK);
         tasks.put(id, task);
     }
 
@@ -102,6 +103,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void createEpic(Epic epic) {
         id++;
         epic.setId(id);
+        epic.setTaskType(TaskTypes.EPIC);
         epics.put(epic.getId(), epic);
         updateStatusEpic(id);
     }
@@ -179,6 +181,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void createSubtask(Subtask subtask) {
         id++;
         subtask.setId(id);
+        subtask.setTaskType(TaskTypes.SUBTASK);
         subtasks.put(id, subtask);
         for (Integer num : epics.keySet()) {
             Epic epic = epics.get(num);
