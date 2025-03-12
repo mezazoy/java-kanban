@@ -4,25 +4,21 @@ import ru.yandex.taskTraker.model.Epic;
 import ru.yandex.taskTraker.model.Subtask;
 import ru.yandex.taskTraker.model.Task;
 import ru.yandex.taskTraker.service.*;
-
-
-import java.io.File;
-
 import static ru.yandex.taskTraker.service.Status.IN_PROGRESS;
 import static ru.yandex.taskTraker.service.Status.NEW;
 
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = Managers.getDefaultFileBacked();
+        TaskManager taskManager = Managers.getDefault();
 
-        /*taskManager.createTask(new Task("task1", "taskdeskr", NEW));
+        taskManager.createTask(new Task("task1", "taskdeskr", NEW));
         taskManager.createEpic(new Epic("epic1", "epicdeskr"));
 
         taskManager.createSubtask(new Subtask("subtask", "subdeskr", NEW, 2));
         taskManager.createSubtask(new Subtask("subtask2", "subdeskr2", NEW, 2));
         taskManager.createSubtask(new Subtask("subtask3", "subdeskr3", NEW, 2));
-        taskManager.createSubtask(new Subtask("subtask4", "subdeskr4", IN_PROGRESS, 2));*/
+        taskManager.createSubtask(new Subtask("subtask4", "subdeskr4", IN_PROGRESS, 2));
         System.out.println(taskManager.getTasks());
         System.out.println(taskManager.getEpics());
         System.out.println(taskManager.getSubtasks());

@@ -5,17 +5,7 @@ import java.io.IOException;
 
 public class Managers<T extends TaskManager> {
 
-    public static TaskManager getDefault() {
-
-        return new InMemoryTaskManager();
-    }
-
-    public static HistoryManager getDefaultHistory() {
-
-        return new InMemoryHistoryManager();
-    }
-
-    public static FileBackedTaskManager getDefaultFileBacked() {
+    public static FileBackedTaskManager getDefault() {
 
         try {
             File file = new File("TaskTracker.txt"); // Or use a configurable path
@@ -27,6 +17,11 @@ public class Managers<T extends TaskManager> {
             System.err.println("Error initializing FileBackedTaskManager: " + e.getMessage());
             throw new RuntimeException("Failed to initialize FileBackedTaskManager", e);
         }
+    }
+
+    public static HistoryManager getDefaultHistory() {
+
+        return new InMemoryHistoryManager();
     }
 
 }

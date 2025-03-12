@@ -1,6 +1,9 @@
 package ru.yandex.taskTraker.service;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import ru.yandex.taskTraker.model.Epic;
 import ru.yandex.taskTraker.model.Subtask;
 import ru.yandex.taskTraker.model.Task;
@@ -58,25 +61,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             throw e;
         }
     }
-    /*public Task fromString(String value) {
-        String[] split = value.split(",");
-        if (split[1].equals("TASK")) {
-            Task task = new Task(split[2], split[4], Status.valueOf(split[3]));
-            task.setId(parseInt(split[0]));
-            task.setTaskType(TaskTypes.TASK);
-            return task;
-        } else if (split[1].equals("EPIC")) {
-            Task epic = new Epic(split[2], split[4]);
-            epic.setId(parseInt(split[0]));
-            epic.setTaskType(TaskTypes.EPIC);
-            return epic;
-        } else {
-            Task subtask = new Subtask(split[2], split[4], Status.valueOf(split[3]), parseInt(split[5]));
-            subtask.setId(parseInt(split[0]));
-            subtask.setTaskType(TaskTypes.SUBTASK);
-            return subtask;
-        }
-    }*/
 
     private void save() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
@@ -94,27 +78,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             bw.write(System.lineSeparator());
         }
     }
-
-    /*private void save() {
-        try (Writer writer = new FileWriter(file); BufferedWriter bw = new BufferedWriter(writer)) {
-            for (Task task : super.getTasks()) {
-                bw.write(task.toString());
-                bw.write("\n");
-            }
-
-            for (Epic epic : super.getEpics()) {
-                bw.write(epic.toString());
-                bw.write("\n");
-            }
-
-            for (Subtask subtask : super.getSubtasks()) {
-                bw.write(subtask.toString());
-                bw.write("\n");
-            }
-        } catch (IOException ex) {
-            throw new ManagerSaveException(ex.getMessage());
-        }
-    }*/
 
     @Override
     public int addTask(Task task) {
