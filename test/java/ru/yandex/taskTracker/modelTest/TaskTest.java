@@ -7,9 +7,8 @@ import ru.yandex.taskTraker.service.HistoryManager;
 import ru.yandex.taskTraker.service.Managers;
 import ru.yandex.taskTraker.service.Status;
 import ru.yandex.taskTraker.service.TaskManager;
-
+import ru.yandex.taskTraker.service.TaskTypes;
 import java.util.List;
-
 import static ru.yandex.taskTraker.service.Status.NEW;
 
 class TaskTest {

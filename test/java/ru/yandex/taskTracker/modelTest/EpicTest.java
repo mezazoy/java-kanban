@@ -20,7 +20,7 @@ public class EpicTest {
     void addNewEpic() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
 
-        final int epicId = taskManager.addTask(epic);
+        final int epicId = taskManager.addEpic(epic);
 
         final Epic savedEpic = taskManager.getEpicByIdentifier(epicId);
 
@@ -50,7 +50,7 @@ public class EpicTest {
         String descr1 = epic.getDescription();
         String name1 = epic.getTaskName();
         Status status1 = epic.getStatusTask();
-        int taskId = taskManager.addTask(epic);
+        int taskId = taskManager.addEpic(epic);
         Assertions.assertEquals(name1, taskManager.getEpicByIdentifier(taskId).getTaskName(), "Поле изменилось");
         Assertions.assertEquals(status1, taskManager.getEpicByIdentifier(taskId).getStatusTask(), "Поле изменилось");
         Assertions.assertEquals(descr1, taskManager.getEpicByIdentifier(
