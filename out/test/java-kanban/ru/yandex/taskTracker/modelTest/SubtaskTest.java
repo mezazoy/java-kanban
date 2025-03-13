@@ -13,15 +13,16 @@ import ru.yandex.taskTraker.service.Status;
 import java.util.List;
 
 public class SubtaskTest {
-    InMemoryTaskManager taskManager = new InMemoryTaskManager();
+    InMemoryTaskManager taskManager = Managers.getDefault();
     HistoryManager historyManager = Managers.getDefaultHistory();
 
     @Test
     void addNewSubtask() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
         Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId());
+        taskManager.addEpic(epic);
 
-        final int subtaskId = taskManager.addTask(subtask);
+        final int subtaskId = taskManager.addSubtask(subtask);
 
         final Subtask savedSubtask = taskManager.getSubtaskByIdentifier(subtaskId);
 
@@ -39,11 +40,12 @@ public class SubtaskTest {
     void immutabilityTask() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
         Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId());
+        taskManager.addEpic(epic);
 
         String descr1 = subtask.getDescription();
         String name1 = subtask.getTaskName();
         Status status1 = subtask.getStatusTask();
-        int taskId = taskManager.addTask(subtask);
+        int taskId = taskManager.addSubtask(subtask);
         Assertions.assertEquals(name1, taskManager.getSubtaskByIdentifier(taskId).getTaskName(), "Поле изменилось");
         Assertions.assertEquals(status1, taskManager.getSubtaskByIdentifier(taskId).getStatusTask(), "Поле изменилось");
         Assertions.assertEquals(descr1, taskManager.getSubtaskByIdentifier(
@@ -54,6 +56,7 @@ public class SubtaskTest {
     void addHistory() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
         Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId());
+        taskManager.addEpic(epic);
 
         historyManager.add(subtask);
         final List<Task> history = historyManager.getHistory();
