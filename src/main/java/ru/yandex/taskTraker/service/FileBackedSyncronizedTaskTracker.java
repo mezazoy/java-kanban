@@ -13,7 +13,7 @@ public class FileBackedSyncronizedTaskTracker {
     public static FileBackedTaskManager loadFromFile(File file) {
 
         FileBackedTaskManager fb = new FileBackedTaskManager(file);
-        try(FileReader reader = new FileReader(file); BufferedReader br = new BufferedReader(reader)) {
+        try(FileReader reader = new FileReader(file); BufferedReader br = new BufferedReader(reader)){
             while (br.ready()) {
                 Task task = fb.fromString(br.readLine());
                 if (task.getTaskType() == TaskTypes.TASK) {
