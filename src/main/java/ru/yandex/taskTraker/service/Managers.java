@@ -1,10 +1,25 @@
 package ru.yandex.taskTraker.service;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Managers<T extends TaskManager> {
-
-    public static TaskManager getDefault() {
-
+    public static InMemoryTaskManager getDefault() {
         return new InMemoryTaskManager();
+    }
+
+    public static FileBackedTaskManager getDefaultFile() {
+
+        try {
+            File file = new File("TaskTracker.txt"); // Or use a configurable path
+            if (!file.exists()) {
+                file.createNewFile(); // Ensure file exists
+            }
+            return FileBackedSyncronizedTaskTracker.loadFromFile(new File("TaskTracker.txt"));
+        } catch (IOException e) {
+            System.err.println("Error initializing FileBackedTaskManager: " + e.getMessage());
+            throw new RuntimeException("Failed to initialize FileBackedTaskManager", e);
+        }
     }
 
     public static HistoryManager getDefaultHistory() {
