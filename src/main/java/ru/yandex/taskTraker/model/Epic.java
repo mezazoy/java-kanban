@@ -1,10 +1,12 @@
 package ru.yandex.taskTraker.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Epic extends Task {
 
     private final ArrayList<Integer> subtaskId = new ArrayList<>();
+    private LocalDateTime endTime;
 
     public Epic(String taskName, String description) {
         super();
@@ -18,6 +20,15 @@ public class Epic extends Task {
 
     public ArrayList<Integer> getSubtasksId() {
         return new ArrayList<>(subtaskId);
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     @Override

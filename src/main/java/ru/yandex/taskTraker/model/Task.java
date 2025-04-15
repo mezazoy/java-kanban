@@ -3,6 +3,10 @@ package ru.yandex.taskTraker.model;
 import ru.yandex.taskTraker.service.Status;
 import ru.yandex.taskTraker.service.TaskTypes;
 
+import java.sql.SQLOutput;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 
@@ -12,16 +16,44 @@ public class Task {
     protected String description;
     private Status statusTask;
     protected TaskTypes taskType;
+    protected Duration duration;
+    protected LocalDateTime startTime;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    public Task(String taskName, String description, Status statusTask) {
+    public Task(String taskName, String description, Status statusTask, String duration, String startTime) {
 
         this.taskName = taskName;
         this.description = description;
         this.statusTask = statusTask;
+        try {
+            this.duration = Duration.ofHours(Integer.parseInt(duration.trim()));
+        } catch(NumberFormatException ex) {
+            System.out.println("Неккоректный формат числа " + ex.getMessage());
+        }
+        this.startTime = LocalDateTime.parse(startTime, formatter);
     }
-
     public Task() {
 
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return startTime.plus(duration);
     }
 
     public TaskTypes getTaskType() {
@@ -72,7 +104,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + taskType + "," + taskName + "," + statusTask + "," + description;
+        return id + "," + taskType + "," + taskName + "," + statusTask + "," + description + "," + duration.toMinutes()
+        + "," + startTime.format(formatter);
     }
 
     public void setTaskName(String taskName) {

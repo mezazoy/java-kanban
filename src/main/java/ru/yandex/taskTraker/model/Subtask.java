@@ -5,8 +5,8 @@ import ru.yandex.taskTraker.service.Status;
 public class Subtask extends Task {
     private final int epicId;
 
-    public Subtask(String taskName, String description, Status statusTask, int epicId) {
-        super(taskName, description, statusTask);
+    public Subtask(String taskName, String description, Status statusTask, int epicId, String duration, String startTime) {
+        super(taskName, description, statusTask, duration, startTime);
             this.epicId = epicId;
     }
 

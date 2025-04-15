@@ -11,9 +11,9 @@ public class Managers<T extends TaskManager> {
     public static FileBackedTaskManager getDefaultFile() {
 
         try {
-            File file = new File("TaskTracker.txt"); // Or use a configurable path
+            File file = new File("TaskTracker.txt");
             if (!file.exists()) {
-                file.createNewFile(); // Ensure file exists
+                file.createNewFile();
             }
             return FileBackedSyncronizedTaskTracker.loadFromFile(new File("TaskTracker.txt"));
         } catch (IOException e) {

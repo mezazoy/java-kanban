@@ -19,20 +19,22 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         try {
             String[] split = value.split(",");
 
-            if (split.length < 5) {
+            if (split.length < 7) {
                 throw new IllegalArgumentException("Неверный формат входной строки: " + value);
             }
 
             int id = Integer.parseInt(split[0]);
             String taskName = split[2];
             String description = split[4];
+            String duration = split[5];
+            String startTime = split[6];
             Task task;
 
             switch (split[1]) {
                 case "TASK":
-                    if (split.length < 5) throw new IllegalArgumentException("Неверное количество полей для TASK");
+                    if (split.length < 7) throw new IllegalArgumentException("Неверное количество полей для TASK");
                     Status status = Status.valueOf(split[3]);
-                    task = new Task(taskName, description, status);
+                    task = new Task(taskName, description, status, duration, startTime);
                     task.setTaskType(TaskTypes.TASK);
                     break;
 
@@ -42,10 +44,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                     break;
 
                 case "SUBTASK":
-                    if (split.length < 6) throw new IllegalArgumentException("Неверное количество полей для SUBTASK");
+                    if (split.length < 8) throw new IllegalArgumentException("Неверное количество полей для SUBTASK");
                     status = Status.valueOf(split[3]);
                     int epicId = Integer.parseInt(split[5]);
-                    task = new Subtask(taskName, description, status, epicId);
+                    task = new Subtask(taskName, description, status, epicId, duration, startTime);
                     task.setTaskType(TaskTypes.SUBTASK);
                     break;
 

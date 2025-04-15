@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         TaskManager taskManager = Managers.getDefault();
 
-        taskManager.createTask(new Task("task1", "taskdeskr", NEW));
+        taskManager.createTask(new Task("task1", "taskdeskr", NEW, "30", "11.04.25 15:50"));
         taskManager.createEpic(new Epic("epic1", "epicdeskr"));
 
         taskManager.createSubtask(new Subtask("subtask", "subdeskr", NEW, 2));
