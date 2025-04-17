@@ -26,11 +26,12 @@ public class Task {
         this.statusTask = statusTask;
         try {
             this.duration = Duration.ofHours(Integer.parseInt(duration.trim()));
-        } catch(NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             System.out.println("Неккоректный формат числа " + ex.getMessage());
         }
         this.startTime = LocalDateTime.parse(startTime, formatter);
     }
+
     public Task() {
 
     }
