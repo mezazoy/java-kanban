@@ -3,7 +3,6 @@ package ru.yandex.taskTraker.model;
 import ru.yandex.taskTraker.service.Status;
 import ru.yandex.taskTraker.service.TaskTypes;
 
-import java.sql.SQLOutput;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +13,7 @@ public class Task {
     protected int id;
     protected String taskName;
     protected String description;
-    private Status statusTask;
+    protected Status statusTask;
     protected TaskTypes taskType;
     protected Duration duration;
     protected LocalDateTime startTime;
