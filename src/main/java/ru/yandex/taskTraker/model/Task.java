@@ -10,7 +10,7 @@ import java.util.Objects;
 
 
 public class Task {
-    protected int id;
+    protected int id = 0;
     protected String taskName;
     protected String description;
     protected Status statusTask;
@@ -25,7 +25,7 @@ public class Task {
         this.description = description;
         this.statusTask = statusTask;
         try {
-            this.duration = Duration.ofHours(Integer.parseInt(duration.trim()));
+            this.duration = Duration.ofMinutes(Integer.parseInt(duration.trim()));
         } catch (NumberFormatException ex) {
             System.out.println("Неккоректный формат числа " + ex.getMessage());
         }

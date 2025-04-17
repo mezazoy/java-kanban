@@ -53,8 +53,6 @@ public class InMemoryTaskManager implements TaskManager {
                 }
                 updateStatusEpic(subtask.getEpicId());
                 updateEpicStartTime(subtask.getEpicId());
-                prioritizedTasks.remove(epics.get(subtask.getEpicId()));
-                prioritizedTasks.add(epics.get(subtask.getEpicId()));
             }
         } catch (IntersectionTime ex) {
             System.out.println("Задача не модет быть добавлена, есть пересечения по времени с другими задачами!");
@@ -373,7 +371,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     public boolean intersectionCheck(Task t1) {
         for (Task task : getPrioritizedTasks()) {
-            if (task.getEndTime().isBefore(t1.getStartTime()) && t1.getEndTime().isBefore(task.getStartTime())) return false;
+            if (task.getStartTime().isBefore(t1.getEndTime()) && task.getEndTime().isAfter(t1.getStartTime()))
+                return false;
         }
         return true;
     }

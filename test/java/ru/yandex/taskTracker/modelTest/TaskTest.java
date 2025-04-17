@@ -18,7 +18,7 @@ class TaskTest {
 
     @Test
     void addNewTask() {
-        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW);
+        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW, "30", "25.05.25 11:00");
 
         final int taskId = taskManager.addTask(task);
 
@@ -36,7 +36,7 @@ class TaskTest {
 
     @Test
     void addHistory() {
-        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW);
+        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW, "30", "25.05.25 11:00");
 
         historyManager.add(task);
         final List<Task> history = historyManager.getHistory();
@@ -46,7 +46,7 @@ class TaskTest {
 
     @Test
     void immutabilityTask() {
-        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW);
+        Task task = new Task("Test addNewTask", "Test addNewTask description", NEW, "30", "25.05.25 11:00");
 
         String descr1 = task.getDescription();
         String name1 = task.getTaskName();
