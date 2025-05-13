@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Epic extends Task {
 
     private final ArrayList<Integer> subtaskId = new ArrayList<>();
-    private LocalDateTime endTime;
 
     public Epic(String taskName, String description) {
         super();
@@ -16,6 +15,10 @@ public class Epic extends Task {
 
     public void addSubtaskId(int id) {
         if (id > this.id) subtaskId.add(id);
+    }
+
+    public void removeSubtaskId(int id) {
+        subtaskId.remove(id);
     }
 
     public ArrayList<Integer> getSubtasksId() {

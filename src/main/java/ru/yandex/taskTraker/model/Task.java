@@ -17,6 +17,7 @@ public class Task {
     protected TaskTypes taskType;
     protected Duration duration;
     protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
     public Task(String taskName, String description, Status statusTask, String duration, String startTime) {
@@ -53,7 +54,8 @@ public class Task {
     }
 
     public LocalDateTime getEndTime() {
-        return startTime.plus(duration);
+        calculateEndTime();
+        return endTime;
     }
 
     public TaskTypes getTaskType() {
@@ -82,7 +84,7 @@ public class Task {
                 Objects.equals(description, otherTask.description) && Objects.equals(statusTask, otherTask.statusTask);
     }
 
-@Override
+    @Override
     public int hashCode() {
         int hash = 17;
         if (taskName != null) {
@@ -105,7 +107,7 @@ public class Task {
     @Override
     public String toString() {
         return id + "," + taskType + "," + taskName + "," + statusTask + "," + description + "," + duration.toMinutes()
-        + "," + startTime.format(formatter);
+                + "," + startTime.format(formatter);
     }
 
     public void setTaskName(String taskName) {
@@ -130,6 +132,14 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getEpicId() {
+        return 0;
+    }
+
+    private void calculateEndTime() {
+        endTime = startTime.plus(duration);
     }
 }
 

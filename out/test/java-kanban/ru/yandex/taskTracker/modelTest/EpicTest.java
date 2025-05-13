@@ -11,7 +11,6 @@ import ru.yandex.taskTraker.service.TaskManager;
 
 import java.util.List;
 
-
 public class EpicTest {
     TaskManager taskManager = Managers.getDefault();
     HistoryManager historyManager = Managers.getDefaultHistory();
