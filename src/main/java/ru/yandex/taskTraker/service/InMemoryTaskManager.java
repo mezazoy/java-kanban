@@ -287,17 +287,15 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void updateSubtask(int idSubtask, Subtask subtask) {
         subtask.setId(idSubtask);
-        try {
-            if (intersectionCheck(subtask)) {
-                prioritizedTasks.remove(subtasks.get(idSubtask));
-                subtasks.put(idSubtask, subtask);
-                updateStatusEpic(subtask.getEpicId());
-                updateEpicStartTime(subtask.getEpicId());
-                prioritizedTasks.remove(epics.get(subtask.getEpicId()));
-                prioritizedTasks.add(epics.get(subtask.getEpicId()));
-                prioritizedTasks.add(subtask);
-            }
-        } catch (IntersectionTime ex) {
+        if (intersectionCheck(subtask)) {
+            prioritizedTasks.remove(subtasks.get(idSubtask));
+            subtasks.put(idSubtask, subtask);
+            updateStatusEpic(subtask.getEpicId());
+            updateEpicStartTime(subtask.getEpicId());
+            prioritizedTasks.remove(epics.get(subtask.getEpicId()));
+            prioritizedTasks.add(epics.get(subtask.getEpicId()));
+            prioritizedTasks.add(subtask);
+        } else {
             System.out.println("Задача не модет быть добавлена, есть пересечения по времени с другими задачами!");
         }
     }
