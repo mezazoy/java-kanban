@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import ru.yandex.taskTraker.service.FileBackedTaskManager;
 import static org.junit.jupiter.api.Assertions.*;
-
 import ru.yandex.taskTraker.model.Subtask;
 import ru.yandex.taskTraker.model.Task;
 import ru.yandex.taskTraker.service.Status;
