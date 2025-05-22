@@ -21,7 +21,7 @@ class InMemoryTaskManagerTest<T extends TaskManager> {
         taskManager.createSubtask(new Subtask("subName", "descr", Status.DONE, epic.getId(), "25", "20.05.25 11:05"));
 
         Assertions.assertEquals(epic.getStartTime(), taskManager.getSubtasks().getFirst().getStartTime()
-                , "Даты не совпадают!");
+                , "Время и дата не совпадают!");
     }
 
     @Test
