@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.testng.Assert;
 import ru.yandex.taskTraker.model.Epic;
 import ru.yandex.taskTraker.model.Subtask;
 import ru.yandex.taskTraker.model.Task;
