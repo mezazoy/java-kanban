@@ -56,4 +56,6 @@ public interface TaskManager {
 
     Status getStatus(int idEpic);
 
+    ArrayList<Task> getPrioritizedTasks();
+
 }

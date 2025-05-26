@@ -19,7 +19,8 @@ public class SubtaskTest {
     @Test
     void addNewSubtask() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
-        Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId());
+        Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId(), "30"
+                , "25.05.25 11:00");
         taskManager.addEpic(epic);
 
         final int subtaskId = taskManager.addSubtask(subtask);
@@ -39,7 +40,7 @@ public class SubtaskTest {
     @Test
     void immutabilityTask() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
-        Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId());
+        Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId(), "30", "25.05.25 11:00");
         taskManager.addEpic(epic);
 
         String descr1 = subtask.getDescription();
@@ -55,7 +56,7 @@ public class SubtaskTest {
     @Test
     void addHistory() {
         Epic epic = new Epic("Test addNewTask", "Test addNewTask description");
-        Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId());
+        Subtask subtask = new Subtask("test name", "test deskription", Status.NEW, epic.getId(), "30", "25.05.25 11:00");
         taskManager.addEpic(epic);
 
         historyManager.add(subtask);

@@ -30,9 +30,11 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
             switch (split[1]) {
                 case "TASK":
-                    if (split.length < 5) throw new IllegalArgumentException("Неверное количество полей для TASK");
+                    if (split.length < 7) throw new IllegalArgumentException("Неверное количество полей для TASK");
                     Status status = Status.valueOf(split[3]);
-                    task = new Task(taskName, description, status);
+                    String duration = split[5];
+                    String startTime = split[6];
+                    task = new Task(taskName, description, status, duration, startTime);
                     task.setTaskType(TaskTypes.TASK);
                     break;
 
@@ -42,10 +44,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                     break;
 
                 case "SUBTASK":
-                    if (split.length < 6) throw new IllegalArgumentException("Неверное количество полей для SUBTASK");
+                    if (split.length < 8) throw new IllegalArgumentException("Неверное количество полей для SUBTASK");
                     status = Status.valueOf(split[3]);
-                    int epicId = Integer.parseInt(split[5]);
-                    task = new Subtask(taskName, description, status, epicId);
+                    int epicId = Integer.parseInt(split[7]);
+                    String dur = split[5];
+                    String start = split[6];
+                    task = new Subtask(taskName, description, status, epicId, dur, start);
                     task.setTaskType(TaskTypes.SUBTASK);
                     break;
 

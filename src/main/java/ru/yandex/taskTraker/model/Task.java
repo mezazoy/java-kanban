@@ -3,25 +3,59 @@ package ru.yandex.taskTraker.model;
 import ru.yandex.taskTraker.service.Status;
 import ru.yandex.taskTraker.service.TaskTypes;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 
 public class Task {
-    protected int id;
+    protected int id = 0;
     protected String taskName;
     protected String description;
-    private Status statusTask;
+    protected Status statusTask;
     protected TaskTypes taskType;
+    protected Duration duration;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    public Task(String taskName, String description, Status statusTask) {
+    public Task(String taskName, String description, Status statusTask, String duration, String startTime) {
 
         this.taskName = taskName;
         this.description = description;
         this.statusTask = statusTask;
+        try {
+            this.duration = Duration.ofMinutes(Integer.parseInt(duration.trim()));
+        } catch (NumberFormatException ex) {
+            System.out.println("Неккоректный формат числа " + ex.getMessage());
+        }
+        this.startTime = LocalDateTime.parse(startTime, formatter);
     }
 
     public Task() {
 
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        calculateEndTime();
+        return endTime;
     }
 
     public TaskTypes getTaskType() {
@@ -50,7 +84,7 @@ public class Task {
                 Objects.equals(description, otherTask.description) && Objects.equals(statusTask, otherTask.statusTask);
     }
 
-@Override
+    @Override
     public int hashCode() {
         int hash = 17;
         if (taskName != null) {
@@ -72,7 +106,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + "," + taskType + "," + taskName + "," + statusTask + "," + description;
+        return id + "," + taskType + "," + taskName + "," + statusTask + "," + description + "," + duration.toMinutes()
+                + "," + startTime.format(formatter);
     }
 
     public void setTaskName(String taskName) {
@@ -97,6 +132,14 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getEpicId() {
+        return 0;
+    }
+
+    private void calculateEndTime() {
+        endTime = startTime.plus(duration);
     }
 }
 
