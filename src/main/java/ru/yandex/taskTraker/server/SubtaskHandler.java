@@ -67,9 +67,9 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
         String subtaskId = splitPath[2];
         try{
             int id = Integer.parseInt(subtaskId);
-            taskManager.getSubtaskByIdentifier(id);
-            exchange.sendResponseHeaders(201, -1);
-            exchange.close();
+            Subtask subtask = taskManager.getSubtaskByIdentifier(id);
+            String json = gson.toJson(subtask);
+            sendText(exchange, json);
         } catch (NumberFormatException | TaskNotFoundException e) {
             sendNotFound(exchange);
         } catch (Exception e) {
