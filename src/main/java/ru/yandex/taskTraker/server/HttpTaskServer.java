@@ -2,9 +2,6 @@ package ru.yandex.taskTraker.server;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import com.sun.net.httpserver.HttpServer;
 import ru.yandex.taskTraker.service.Managers;
 import ru.yandex.taskTraker.service.TaskManager;
