@@ -112,9 +112,9 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
             taskManager.deleteSubtaskByIdentifier(id);
             exchange.sendResponseHeaders(201, -1);
             exchange.close();
-        } catch(NumberFormatException | TaskNotFoundException e) {
+        } catch (NumberFormatException | TaskNotFoundException e) {
             sendNotFound(exchange);
-        } catch(Exception e) {
+        } catch (Exception e) {
             exchange.sendResponseHeaders(500, -1);
             exchange.close();
         }
