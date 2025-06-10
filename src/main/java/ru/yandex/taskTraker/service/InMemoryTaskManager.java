@@ -383,4 +383,9 @@ public class InMemoryTaskManager implements TaskManager {
         }
         return true;
     }
+
+    @Override
+    public ArrayList<Task> getHistory() {
+        return historyManager.getHistory();
+    }
 }

@@ -8,6 +8,7 @@ import ru.yandex.taskTraker.model.Task;
 import ru.yandex.taskTraker.service.TaskIntersectionException;
 import ru.yandex.taskTraker.service.TaskManager;
 import ru.yandex.taskTraker.service.TaskNotFoundException;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
