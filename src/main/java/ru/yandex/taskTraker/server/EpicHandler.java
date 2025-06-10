@@ -108,7 +108,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
 
     private void handlePost(HttpExchange exchange) throws IOException {
         InputStreamReader reader = new InputStreamReader(exchange.getRequestBody(), "utf-8");
-        Task epic = gson.fromJson(reader, Task.class);
+        Task epic = gson.fromJson(reader, Epic.class);
 
         try {
             taskManager.addEpic((Epic) epic);

@@ -1,18 +1,26 @@
 package ru.yandex.taskTraker.server;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.sun.net.httpserver.HttpServer;
 import ru.yandex.taskTraker.service.Managers;
 import ru.yandex.taskTraker.service.TaskManager;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class HttpTaskServer {
     private static final int PORT = 8080;
     private HttpServer server;
     private final TaskManager taskManager;
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().registerTypeAdapter(Duration.class, new DurationTypeAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .create();
 
     public HttpTaskServer(TaskManager taskManager) {
         this.taskManager = taskManager;
