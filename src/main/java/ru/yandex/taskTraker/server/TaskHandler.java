@@ -19,6 +19,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
     public TaskHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
@@ -28,7 +29,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
         try {
             switch (method) {
                 case "GET":
-                    if(splitPath.length > 2){
+                    if (splitPath.length > 2) {
                         handleGetTaskById(exchange);
                     } else {
                         handleGet(exchange);
@@ -59,12 +60,14 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
     private void handleGetTaskById(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] splitPath = path.split("/");
-        if(splitPath.length < 3) {
+
+        if (splitPath.length < 3) {
             sendNotFound(exchange);
             return;
         }
         String taskId = splitPath[2];
-        try{
+
+        try {
             int id = Integer.parseInt(taskId);
             Task task = taskManager.getTaskByIdentifier(id);
             String json = gson.toJson(task);
@@ -96,12 +99,14 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
     private void handleDelete(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] split = path.split("/");
-        if(split.length < 3) {
+
+        if (split.length < 3) {
             sendNotFound(exchange);
             return;
         }
         String taskId = split[2];
-        try{
+
+        try {
             int id = Integer.parseInt(taskId);
             taskManager.deleteTaskByIdentifier(id);
             exchange.sendResponseHeaders(201, -1);

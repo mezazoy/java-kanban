@@ -30,7 +30,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
         try {
             switch (method) {
                 case "GET":
-                    if(splitPath.length > 2){
+                    if (splitPath.length > 2) {
                         handleGetSubtaskById(exchange);
                     } else {
                         handleGet(exchange);
@@ -61,12 +61,14 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
     private void handleGetSubtaskById(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] splitPath = path.split("/");
-        if(splitPath.length < 3) {
+
+        if (splitPath.length < 3) {
             sendNotFound(exchange);
             return;
         }
         String subtaskId = splitPath[2];
-        try{
+
+        try {
             int id = Integer.parseInt(subtaskId);
             Subtask subtask = taskManager.getSubtaskByIdentifier(id);
             String json = gson.toJson(subtask);
@@ -98,12 +100,14 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
     private void handleDelete(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] split = path.split("/");
-        if(split.length < 3) {
+
+        if (split.length < 3) {
             sendNotFound(exchange);
             return;
         }
         String subtaskId = split[2];
-        try{
+
+        try {
             int id = Integer.parseInt(subtaskId);
             taskManager.deleteSubtaskByIdentifier(id);
             exchange.sendResponseHeaders(201, -1);

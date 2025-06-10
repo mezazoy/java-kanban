@@ -20,8 +20,9 @@ public class PrioritizedHandler extends BaseHttpHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
+
         try {
-            if(method.equals("GET")){
+            if (method.equals("GET")) {
                 handleGet(exchange);
             } else {
                 exchange.sendResponseHeaders(400, -1);

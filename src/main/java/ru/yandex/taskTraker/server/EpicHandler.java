@@ -21,6 +21,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     public EpicHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
@@ -30,9 +31,9 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         try {
             switch (method) {
                 case "GET":
-                    if(splitPath.length == 3){
+                    if (splitPath.length == 3) {
                         handleGetEpicById(exchange);
-                    } else if(splitPath.length == 4) {
+                    } else if (splitPath.length == 4) {
                         handleGetEpicSubtasks(exchange);
                     } else {
                         handleGet(exchange);
@@ -63,12 +64,13 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     private void handleGetEpicSubtasks(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] splitPath = path.split("/");
-        if(splitPath.length < 4) {
+        if (splitPath.length < 4) {
             sendNotFound(exchange);
             return;
         }
         String epicId = splitPath[2];
-        try{
+
+        try {
             int id = Integer.parseInt(epicId);
             List<Subtask> subtasks = taskManager.getSubtaskForEpic(id);
             String json = gson.toJson(subtasks);
@@ -84,12 +86,14 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     private void handleGetEpicById(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] splitPath = path.split("/");
-        if(splitPath.length < 3) {
+
+        if (splitPath.length < 3) {
             sendNotFound(exchange);
             return;
         }
         String epicId = splitPath[2];
-        try{
+
+        try {
             int id = Integer.parseInt(epicId);
             Epic epic = taskManager.getEpicByIdentifier(id);
             String json = gson.toJson(epic);
@@ -121,19 +125,21 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
     private void handleDelete(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         String[] split = path.split("/");
-        if(split.length < 3) {
+
+        if (split.length < 3) {
             sendNotFound(exchange);
             return;
         }
         String epicId = split[2];
-        try{
+
+        try {
             int id = Integer.parseInt(epicId);
             taskManager.deleteEpicByIdentifier(id);
             exchange.sendResponseHeaders(201, -1);
             exchange.close();
-        } catch(NumberFormatException | TaskNotFoundException e) {
+        } catch (NumberFormatException | TaskNotFoundException e) {
             sendNotFound(exchange);
-        } catch(Exception e) {
+        } catch (Exception e) {
             exchange.sendResponseHeaders(500, -1);
             exchange.close();
         }
