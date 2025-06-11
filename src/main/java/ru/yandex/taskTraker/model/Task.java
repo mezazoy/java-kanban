@@ -18,7 +18,7 @@ public class Task {
     protected Duration duration;
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
     public Task(String taskName, String description, Status statusTask, String duration, String startTime) {
 
@@ -30,7 +30,7 @@ public class Task {
         } catch (NumberFormatException ex) {
             System.out.println("Неккоректный формат числа " + ex.getMessage());
         }
-        this.startTime = LocalDateTime.parse(startTime, formatter);
+        this.startTime = LocalDateTime.parse(startTime, FORMATTER);
     }
 
     public Task() {
@@ -107,7 +107,7 @@ public class Task {
     @Override
     public String toString() {
         return id + "," + taskType + "," + taskName + "," + statusTask + "," + description + "," + duration.toMinutes()
-                + "," + startTime.format(formatter);
+                + "," + startTime.format(FORMATTER);
     }
 
     public void setTaskName(String taskName) {

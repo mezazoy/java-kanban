@@ -1,3 +1,5 @@
+package ru.yandexTest.taskTraker.service;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskTraker.model.Epic;
