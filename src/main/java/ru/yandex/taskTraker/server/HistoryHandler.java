@@ -1,21 +1,13 @@
 package ru.yandex.taskTraker.server;
 
-import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import ru.yandex.taskTraker.model.Task;
-import ru.yandex.taskTraker.service.TaskManager;
 
 import java.io.IOException;
 import java.util.List;
 
 public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
-    private final TaskManager taskManager;
-    private final Gson gson = HttpTaskServer.getGson();
-
-    public HistoryHandler(TaskManager taskManager) {
-        this.taskManager = taskManager;
-    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -29,7 +21,7 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            exchange.sendResponseHeaders(500, -1);
+            exchange.sendResponseHeaders(405, -1);
             exchange.close();
         }
     }

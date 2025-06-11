@@ -1,4 +1,4 @@
-package ru.yandex.taskTraker.server;
+package ru.yandex.taskTraker.adapters;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -10,7 +10,7 @@ import java.time.Duration;
 public class DurationTypeAdapter extends TypeAdapter<Duration> {
     @Override
     public void write(JsonWriter out, Duration value) throws IOException {
-        out.value(value.toString()); // например, "PT5M" для 5 минут
+        out.value(value.toString());
     }
 
     @Override

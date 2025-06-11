@@ -1,4 +1,4 @@
-package ru.yandex.taskTraker.server;
+package ru.yandex.taskTraker.adapters;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -15,17 +15,17 @@ public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
     @Override
     public void write(JsonWriter out, LocalDateTime value) throws IOException {
         if (value == null) {
-            out.nullValue(); // Записываем null в JSON
+            out.nullValue();
         } else {
-            out.value(value.format(formatter)); // Форматируем и записываем дату
+            out.value(value.format(formatter));
         }
     }
 
     @Override
     public LocalDateTime read(JsonReader in) throws IOException {
         if (in.peek() == JsonToken.NULL) {
-            in.nextNull(); // Читаем null из JSON
-            return null;   // Возвращаем null в объекте
+            in.nextNull();
+            return null;
         }
         String str = in.nextString();
         return LocalDateTime.parse(str, formatter);

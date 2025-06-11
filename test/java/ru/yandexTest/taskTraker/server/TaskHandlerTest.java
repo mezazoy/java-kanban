@@ -1,14 +1,12 @@
 package ru.yandexTest.taskTraker.server;
 
-import com.google.gson.Gson;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskTraker.model.Task;
+import ru.yandex.taskTraker.server.BaseHttpHandler;
 import ru.yandex.taskTraker.server.HttpTaskServer;
-import ru.yandex.taskTraker.service.Managers;
 import ru.yandex.taskTraker.service.Status;
-import ru.yandex.taskTraker.service.TaskManager;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,20 +18,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class TaskHandlerTest {
-    TaskManager manager = Managers.getDefault();
-    // передаём его в качестве аргумента в конструктор HttpTaskServer
-    HttpTaskServer taskServer = new HttpTaskServer(manager);
-    Gson gson = HttpTaskServer.getGson();
+class TaskHandlerTest extends BaseHttpHandler {
+    HttpTaskServer taskServer = new HttpTaskServer();
 
-    public TaskHandlerTest() throws IOException {
+    public TaskHandlerTest() {
     }
 
     @BeforeEach
     public void setUp() {
-        manager.deleteAllTasks();
-        manager.deleteAllSubtasks();
-        manager.deleteAllTasks();
+        taskManager.deleteAllTasks();
+        taskManager.deleteAllSubtasks();
+        taskManager.deleteAllTasks();
         try {
             taskServer.start();
         } catch (IOException e) {
@@ -66,7 +61,7 @@ class TaskHandlerTest {
         assertEquals(201, response.statusCode());
 
         // проверяем, что создалась одна задача с корректным именем
-        List<Task> tasksFromManager = manager.getTasks();
+        List<Task> tasksFromManager = taskManager.getTasks();
 
 
 

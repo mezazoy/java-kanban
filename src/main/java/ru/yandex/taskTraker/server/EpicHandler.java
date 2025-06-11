@@ -6,21 +6,13 @@ import ru.yandex.taskTraker.model.Epic;
 import ru.yandex.taskTraker.model.Subtask;
 import ru.yandex.taskTraker.model.Task;
 import ru.yandex.taskTraker.service.TaskIntersectionException;
-import ru.yandex.taskTraker.service.TaskManager;
 import ru.yandex.taskTraker.service.TaskNotFoundException;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
 public class EpicHandler extends BaseHttpHandler implements HttpHandler {
-    private final TaskManager taskManager;
-    private final Gson gson = HttpTaskServer.getGson();
-
-    public EpicHandler(TaskManager taskManager) {
-        this.taskManager = taskManager;
-    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -46,11 +38,11 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                     handleDelete(exchange);
                     break;
                 default:
-                    sendNotFound(exchange);
+                    exchange.sendResponseHeaders(405, -1);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            exchange.sendResponseHeaders(500, -1);
+            exchange.sendResponseHeaders(405, -1);
             exchange.close();
         }
     }
@@ -65,7 +57,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
         String[] splitPath = path.split("/");
         if (splitPath.length < 4) {
-            sendNotFound(exchange);
+            exchange.sendResponseHeaders(400,-1);
             return;
         }
         String epicId = splitPath[2];
@@ -78,7 +70,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         } catch (NumberFormatException | TaskNotFoundException e) {
             sendNotFound(exchange);
         } catch (Exception e) {
-            exchange.sendResponseHeaders(500,-1);
+            exchange.sendResponseHeaders(405,-1);
             exchange.close();
         }
     }
@@ -88,7 +80,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         String[] splitPath = path.split("/");
 
         if (splitPath.length < 3) {
-            sendNotFound(exchange);
+            exchange.sendResponseHeaders(400,-1);
             return;
         }
         String epicId = splitPath[2];
@@ -101,7 +93,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         } catch (NumberFormatException | TaskNotFoundException e) {
             sendNotFound(exchange);
         } catch (Exception e) {
-            exchange.sendResponseHeaders(500,-1);
+            exchange.sendResponseHeaders(405,-1);
             exchange.close();
         }
     }
@@ -117,7 +109,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         } catch (TaskIntersectionException e) {
             sendHasIntersections(exchange);
         } catch (Exception e) {
-            exchange.sendResponseHeaders(500, -1);
+            exchange.sendResponseHeaders(405, -1);
             exchange.close();
         }
     }
@@ -127,7 +119,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         String[] split = path.split("/");
 
         if (split.length < 3) {
-            sendNotFound(exchange);
+            exchange.sendResponseHeaders(400,-1);
             return;
         }
         String epicId = split[2];
@@ -140,7 +132,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         } catch (NumberFormatException | TaskNotFoundException e) {
             sendNotFound(exchange);
         } catch (Exception e) {
-            exchange.sendResponseHeaders(500, -1);
+            exchange.sendResponseHeaders(405, -1);
             exchange.close();
         }
     }

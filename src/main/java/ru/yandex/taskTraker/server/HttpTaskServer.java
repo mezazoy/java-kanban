@@ -1,48 +1,29 @@
 package ru.yandex.taskTraker.server;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpServer;
-import ru.yandex.taskTraker.service.Managers;
-import ru.yandex.taskTraker.service.TaskManager;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.time.Duration;
-import java.time.LocalDateTime;
 
 public class HttpTaskServer {
     private static final int PORT = 8080;
     private HttpServer server;
-    private final TaskManager taskManager;
-    private static final Gson gson = new GsonBuilder().registerTypeAdapter(Duration.class, new DurationTypeAdapter())
-            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-            .create();
-
-    public HttpTaskServer(TaskManager taskManager) {
-        this.taskManager = taskManager;
-    }
 
     public static void main(String[] args) throws IOException {
-        TaskManager manager = Managers.getDefaultFile();
-        HttpTaskServer server = new HttpTaskServer(manager);
+        HttpTaskServer server = new HttpTaskServer();
         server.start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
     }
 
-    public static Gson getGson() {
-        return gson;
-    }
-
     public void start() throws IOException {
         server = HttpServer.create(new InetSocketAddress(PORT), 0);
-        // Регистрация обработчиков
-        server.createContext("/tasks", new TaskHandler(taskManager));
-        server.createContext("/subtasks", new SubtaskHandler(taskManager));
-        server.createContext("/epics", new EpicHandler(taskManager));
-        server.createContext("/history", new HistoryHandler(taskManager));
-        server.createContext("/prioritized", new PrioritizedHandler(taskManager));
+
+        server.createContext("/tasks", new TaskHandler());
+        server.createContext("/subtasks", new SubtaskHandler());
+        server.createContext("/epics", new EpicHandler());
+        server.createContext("/history", new HistoryHandler());
+        server.createContext("/prioritized", new PrioritizedHandler());
 
         server.start();
         System.out.println("Server started on port " + PORT);
