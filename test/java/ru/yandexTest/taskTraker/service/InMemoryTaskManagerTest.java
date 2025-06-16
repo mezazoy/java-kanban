@@ -1,11 +1,11 @@
+package ru.yandexTest.taskTraker.service;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.yandex.taskTraker.model.Epic;
 import ru.yandex.taskTraker.model.Subtask;
 import ru.yandex.taskTraker.model.Task;
 import ru.yandex.taskTraker.service.Status;
-import java.time.LocalDateTime;
-import static org.junit.jupiter.api.Assertions.*;
 import ru.yandex.taskTraker.service.Managers;
 import ru.yandex.taskTraker.service.TaskManager;
 

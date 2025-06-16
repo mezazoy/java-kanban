@@ -1,3 +1,5 @@
+package ru.yandexTest.taskTraker.service;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import ru.yandex.taskTraker.service.InMemoryHistoryManager;

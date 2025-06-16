@@ -1,4 +1,4 @@
-package ru.yandex.taskTracker.modelTest;
+package ru.yandexTest.taskTracker.modelTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package ru.yandex.taskTracker.modelTest;
+package ru.yandexTest.taskTracker.modelTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,6 @@ import ru.yandex.taskTraker.service.HistoryManager;
 import ru.yandex.taskTraker.service.Managers;
 import ru.yandex.taskTraker.service.Status;
 import ru.yandex.taskTraker.service.TaskManager;
-import ru.yandex.taskTraker.service.TaskTypes;
 import java.util.List;
 import static ru.yandex.taskTraker.service.Status.NEW;
 
